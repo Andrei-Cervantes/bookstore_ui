@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 import BooksTable from "../components/home/BooksTable";
 import BooksCard from "../components/home/BooksCard";
+import getBooks from "../services/booksApi/getBooks";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -13,10 +13,9 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get("http://localhost:5555/books")
+    getBooks()
       .then((response) => {
-        setBooks(response.data.data);
+        setBooks(response.data);
         setLoading(false);
       })
       .catch((error) => {
