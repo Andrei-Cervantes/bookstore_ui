@@ -1,5 +1,4 @@
 import { type ReactElement } from "react";
-import ProtectedRoute from "./ProtectedRoute";
 
 // Page imports
 import HomePage from "@/pages/HomePage";
@@ -14,11 +13,7 @@ export interface AppRoute {
 export const appRoutes: AppRoute[] = [
   {
     path: "/",
-    element: (
-      <ProtectedRoute>
-        <HomePage />
-      </ProtectedRoute>
-    ),
+    element: <HomePage />,
     protected: true,
   },
   {
