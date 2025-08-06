@@ -1,11 +1,7 @@
+import Router from "./router";
+
 function App() {
-  return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-    </div>
-  )
+  return <Router />;
 }
 
-export default App
+export default App;
