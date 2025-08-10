@@ -3,7 +3,6 @@ import { type ReactElement } from "react";
 // Page imports
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
-
 export interface AppRoute {
   path: string;
   element: ReactElement;
