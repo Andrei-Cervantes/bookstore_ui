@@ -1,7 +1,7 @@
 const LoginPage = () => {
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="flex flex-1 flex-col items-center justify-center bg-background">
+      <h1 className="text-2xl font-bold text-primary">Login</h1>
     </div>
   );
 };

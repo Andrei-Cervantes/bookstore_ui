@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const PrivateLayout = () => {
   return (
-    <div>
+    <div className="flex flex-col h-screen">
       <Header />
       <Outlet />
     </div>
