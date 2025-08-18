@@ -1,9 +1,9 @@
 import { type ReactElement } from "react";
 
 // Page imports
-import HomePage from "@/pages/Private/HomePage";
-import LoginPage from "@/pages/Public/LoginPage";
-import RegisterPage from "@/pages/Public/RegisterPage";
+import Home from "@/features/private/home/pages/Home";
+import Login from "@/features/public/login/pages/Login";
+import Register from "@/features/public/register/pages/Register";
 
 export interface AppRoute {
   path: string;
@@ -14,15 +14,15 @@ export interface AppRoute {
 export const appRoutes: AppRoute[] = [
   {
     path: "/",
-    element: <HomePage />,
+    element: <Home />,
     protected: true,
   },
   {
     path: "/login",
-    element: <LoginPage />,
+    element: <Login />,
   },
   {
     path: "/register",
-    element: <RegisterPage />,
+    element: <Register />,
   },
 ];

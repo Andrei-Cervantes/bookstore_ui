@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import { appRoutes } from "./routes";
 import ProtectedRoute from "./ProtectedRoute";
-import PrivateLayout from "@/layout/PrivateLayout";
-import PublicLayout from "@/layout/PublicLayout";
-import NotFoundPage from "@/pages/NotFoundPage";
+import PrivateLayout from "@/features/private/layout/PrivateLayout";
+import PublicLayout from "@/features/public/layout/PublicLayout";
+import NotFoundPage from "@/shared/NotFoundPage";
 
 const Router = () => {
   return (
