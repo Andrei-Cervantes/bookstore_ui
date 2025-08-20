@@ -1,5 +1,6 @@
 import { Button } from "@/shared/components/ui/button";
 import { ModeToggle } from "../mode-toggle";
+import Link from "./Link";
 
 const Header = () => {
   return (
@@ -7,8 +8,12 @@ const Header = () => {
       <h1 className="text-2xl font-bold text-primary">Arborary</h1>
       <div className="flex items-center gap-4">
         <ModeToggle />
-        <Button variant="outline">Login</Button>
-        <Button variant="outline">Register</Button>
+        <Button variant="outline" asChild>
+          <Link to="/login">Login</Link>
+        </Button>
+        <Button variant="outline" asChild>
+          <Link to="/register">Register</Link>
+        </Button>
       </div>
     </div>
   );
