@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { ENDPOINTS } from "@/shared/services/endpoints";
-import type { RegisterRequest } from "@/shared/types/authTypes";
+import type { LoginRequest, RegisterRequest } from "@/shared/types/authTypes";
 
 const useAuthService = () => {
   // register
@@ -11,8 +11,16 @@ const useAuthService = () => {
     return response.data;
   };
 
+  // login
+  const login = async (data: LoginRequest) => {
+    const response = await axios.post(ENDPOINTS.AUTH.LOGIN, data);
+
+    return response.data;
+  };
+
   return {
     register,
+    login,
   };
 };
 
