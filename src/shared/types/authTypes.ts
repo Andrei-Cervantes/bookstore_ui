@@ -1,3 +1,13 @@
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  isVerified: boolean;
+  avatar: string;
+  isActive: boolean;
+}
+
 export interface CommonResponse<T> {
   success: boolean;
   message: string;

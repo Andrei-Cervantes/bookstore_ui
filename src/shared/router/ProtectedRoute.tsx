@@ -1,7 +1,10 @@
 import { Navigate } from "react-router-dom";
+import { useTokenStore } from "../stores/tokenStore";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const isAuthenticated = false;
+  const { accessToken } = useTokenStore();
+
+  const isAuthenticated = !!accessToken;
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
