@@ -6,6 +6,7 @@ interface TokenState {
   setAccessToken: (accessToken: string) => void;
   refreshToken: string;
   setRefreshToken: (refreshToken: string) => void;
+  setTokens: (accessToken: string, refreshToken: string) => void;
 }
 
 export const useTokenStore = create<TokenState>()(
@@ -15,6 +16,8 @@ export const useTokenStore = create<TokenState>()(
       setAccessToken: (accessToken) => set({ accessToken }),
       refreshToken: "",
       setRefreshToken: (refreshToken) => set({ refreshToken }),
+      setTokens: (accessToken, refreshToken) =>
+        set({ accessToken, refreshToken }),
     }),
     {
       name: "token-storage",

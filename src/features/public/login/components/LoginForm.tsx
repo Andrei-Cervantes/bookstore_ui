@@ -10,6 +10,8 @@ import InputPassword from "@/shared/components/common/InputPassword";
 import { Mail } from "lucide-react";
 import { Checkbox } from "@/shared/components/ui/checkbox";
 import { useEffect, useState } from "react";
+import { useTokenStore } from "@/shared/stores/tokenStore";
+import { useUserStore } from "@/shared/stores/userStore";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -20,6 +22,8 @@ type LoginSchema = z.infer<typeof loginSchema>;
 
 const LoginForm = () => {
   const [rememberMe, setRememberMe] = useState(false);
+  const { setTokens } = useTokenStore();
+  const { setUser } = useUserStore();
   const navigate = useNavigate();
   const {
     register,
@@ -35,7 +39,18 @@ const LoginForm = () => {
   const { login: loginService } = useAuthService();
   const loginMutation = useMutation({
     mutationFn: (data: LoginSchema) => loginService(data),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data);
+      setTokens(data.data.tokens.accessToken, data.data.tokens.refreshToken);
+      setUser({
+        id: data.data.id,
+        avatar: data.data.avatar,
+        email: data.data.email,
+        isActive: data.data.isActive,
+        isVerified: data.data.isVerified,
+        name: data.data.name,
+        role: data.data.role,
+      });
       navigate("/");
     },
     onError: (error) => {
