@@ -8,6 +8,13 @@ export interface User {
   isActive: boolean;
 }
 
+export interface TokenResponse extends User {
+  tokens: {
+    accessToken: string;
+    refreshToken: string;
+  };
+}
+
 export interface CommonResponse<T> {
   success: boolean;
   message: string;

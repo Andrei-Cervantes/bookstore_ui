@@ -12,6 +12,9 @@ import { Checkbox } from "@/shared/components/ui/checkbox";
 import { useEffect, useState } from "react";
 import { useTokenStore } from "@/shared/stores/tokenStore";
 import { useUserStore } from "@/shared/stores/userStore";
+import { useSnackbar } from "notistack";
+import { AxiosError } from "axios";
+import type { CommonResponse, TokenResponse } from "@/shared/types/authTypes";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -37,24 +40,40 @@ const LoginForm = () => {
 
   // Login Service Mutation
   const { login: loginService } = useAuthService();
+  const { enqueueSnackbar } = useSnackbar();
   const loginMutation = useMutation({
     mutationFn: (data: LoginSchema) => loginService(data),
-    onSuccess: (data) => {
-      console.log(data);
-      setTokens(data.data.tokens.accessToken, data.data.tokens.refreshToken);
+    onSuccess: (data: CommonResponse<TokenResponse>) => {
+      const { data: userData } = data;
+      const { tokens: tokensData } = userData;
+
+      enqueueSnackbar("Login successful", {
+        variant: "success",
+      });
+      setTokens(tokensData.accessToken, tokensData.refreshToken);
       setUser({
-        id: data.data.id,
-        avatar: data.data.avatar,
-        email: data.data.email,
-        isActive: data.data.isActive,
-        isVerified: data.data.isVerified,
-        name: data.data.name,
-        role: data.data.role,
+        id: userData.id,
+        avatar: userData.avatar,
+        email: userData.email,
+        isActive: userData.isActive,
+        isVerified: userData.isVerified,
+        name: userData.name,
+        role: userData.role,
       });
       navigate("/");
     },
     onError: (error) => {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        if (error.response?.data.message === "Email not verified") {
+          enqueueSnackbar("Email not verified", {
+            variant: "error",
+          });
+        } else {
+          enqueueSnackbar("Invalid email or password", {
+            variant: "error",
+          });
+        }
+      }
     },
   });
 
