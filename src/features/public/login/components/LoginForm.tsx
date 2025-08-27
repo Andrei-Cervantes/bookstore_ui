@@ -146,8 +146,8 @@ const LoginForm = () => {
           Remember me
         </label>
       </div>
-      <Button type="submit" className="mt-4">
-        Login
+      <Button type="submit" className="mt-4" disabled={loginMutation.isPending}>
+        {loginMutation.isPending ? "Logging in..." : "Login"}
       </Button>
     </form>
   );

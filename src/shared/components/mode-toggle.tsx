@@ -14,35 +14,41 @@ interface Props {
 }
 
 export function ModeToggle({ isMobile }: Props) {
-  const { setTheme, theme } = useTheme();
+  const { setTheme } = useTheme();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          {isMobile ? (
-            <div>
-              {theme === "light" && "Light"}
-              {theme === "dark" && "Dark"}
-              {theme === "system" && "System"}
-            </div>
-          ) : (
-            <>
-              <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-              <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-              <span className="sr-only">Toggle theme</span>
-            </>
-          )}
-        </Button>
+        {isMobile ? (
+          <div className="hover:cursor-pointer w-full">Set Theme</div>
+        ) : (
+          <Button variant="outline" size="icon">
+            <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+            <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+        )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+      <DropdownMenuContent
+        align={isMobile ? "start" : "end"}
+        side={isMobile ? "left" : "bottom"}
+      >
+        <DropdownMenuItem
+          className="hover:cursor-pointer"
+          onClick={() => setTheme("light")}
+        >
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem
+          className="hover:cursor-pointer"
+          onClick={() => setTheme("dark")}
+        >
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem
+          className="hover:cursor-pointer"
+          onClick={() => setTheme("system")}
+        >
           System
         </DropdownMenuItem>
       </DropdownMenuContent>

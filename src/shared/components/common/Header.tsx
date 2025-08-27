@@ -18,7 +18,7 @@ const Header = () => {
       <h1 className="text-2xl font-bold text-primary">Arborary</h1>
       {isMobile ? (
         <DropdownMenu>
-          <DropdownMenuTrigger>
+          <DropdownMenuTrigger className="hover:cursor-pointer">
             <MenuIcon />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
@@ -26,10 +26,14 @@ const Header = () => {
               <ModeToggle isMobile />
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link to="/login">Login</Link>
+              <Link className="w-full" to="/login">
+                Login
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link to="/register">Register</Link>
+              <Link className="w-full" to="/register">
+                Register
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
