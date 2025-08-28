@@ -9,30 +9,19 @@ import {
 } from "@/shared/components/ui/dropdown-menu";
 import { useTheme } from "@/shared/components/theme-provider";
 
-interface Props {
-  isMobile?: boolean;
-}
-
-export function ModeToggle({ isMobile }: Props) {
+export function ModeToggle() {
   const { setTheme } = useTheme();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        {isMobile ? (
-          <div className="hover:cursor-pointer w-full">Set Theme</div>
-        ) : (
-          <Button variant="outline" size="icon">
-            <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
-        )}
+        <Button variant="outline" size="icon">
+          <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+          <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent
-        align={isMobile ? "start" : "end"}
-        side={isMobile ? "left" : "bottom"}
-      >
+      <DropdownMenuContent align="end" side="bottom">
         <DropdownMenuItem
           className="hover:cursor-pointer"
           onClick={() => setTheme("light")}
