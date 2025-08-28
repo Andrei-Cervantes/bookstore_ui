@@ -16,9 +16,9 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center p-4 bg-background border-b border-border">
       <h1 className="text-2xl font-bold text-primary">Arborary</h1>
-      {isMobile ? (
-        <div className="flex items-center gap-4">
-          <ModeToggle />
+      <div className="flex items-center gap-4">
+        <ModeToggle />
+        {isMobile ? (
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Button
@@ -42,18 +42,17 @@ const Header = () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
-      ) : (
-        <div className="flex items-center gap-4">
-          <ModeToggle />
-          <Button variant="outline" asChild>
-            <Link to="/login">Login</Link>
-          </Button>
-          <Button variant="outline" asChild>
-            <Link to="/register">Register</Link>
-          </Button>
-        </div>
-      )}
+        ) : (
+          <>
+            <Button variant="outline" asChild>
+              <Link to="/login">Login</Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link to="/register">Register</Link>
+            </Button>
+          </>
+        )}
+      </div>
     </div>
   );
 };
