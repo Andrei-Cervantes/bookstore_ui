@@ -9,9 +9,13 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { MenuIcon } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
+  const location = useLocation();
   const isMobile = useMobile();
+  const inLogin = location.pathname === "/login";
+  const inRegister = location.pathname === "/register";
 
   return (
     <div className="flex justify-between items-center p-4 bg-background border-b border-border">
@@ -30,26 +34,34 @@ const Header = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem>
-                <Link className="w-full" to="/login">
-                  Login
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link className="w-full" to="/register">
-                  Register
-                </Link>
-              </DropdownMenuItem>
+              {!inLogin && (
+                <DropdownMenuItem>
+                  <Link className="w-full" to="/login">
+                    Login
+                  </Link>
+                </DropdownMenuItem>
+              )}
+              {!inRegister && (
+                <DropdownMenuItem>
+                  <Link className="w-full" to="/register">
+                    Register
+                  </Link>
+                </DropdownMenuItem>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
           <>
-            <Button variant="outline" asChild>
-              <Link to="/login">Login</Link>
-            </Button>
-            <Button variant="outline" asChild>
-              <Link to="/register">Register</Link>
-            </Button>
+            {!inLogin && (
+              <Button variant="outline" asChild>
+                <Link to="/login">Login</Link>
+              </Button>
+            )}
+            {!inRegister && (
+              <Button variant="outline" asChild>
+                <Link to="/register">Register</Link>
+              </Button>
+            )}
           </>
         )}
       </div>
