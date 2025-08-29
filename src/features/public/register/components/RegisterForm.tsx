@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import InputPassword from "@/shared/components/common/InputPassword";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
+import { enqueueSnackbar } from "notistack";
 
 const registerSchema = z
   .object({
@@ -39,9 +40,18 @@ const RegisterForm = () => {
   const registerMutation = useMutation({
     mutationFn: (data: RegisterSchema) => registerService(data),
     onSuccess: () => {
+      enqueueSnackbar(
+        "Registration successful. An email has been sent to you to verify your account.",
+        {
+          variant: "success",
+        }
+      );
       navigate("/login");
     },
     onError: (error) => {
+      enqueueSnackbar("Registration failed. Please try again.", {
+        variant: "error",
+      });
       console.log(error);
     },
   });
