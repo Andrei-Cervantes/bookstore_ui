@@ -8,9 +8,13 @@ import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import ErrorValidation from "@/shared/components/common/ErrorValidation";
 
 const forgotPasswordSchema = z.object({
-  email: z.string().email("Invalid email address"),
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email address"),
 });
 
 type ForgotPasswordSchema = z.infer<typeof forgotPasswordSchema>;
@@ -63,7 +67,7 @@ const ForgotPasswordForm = () => {
           />
           <Mail className="text-primary absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" />
         </div>
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.email && <ErrorValidation error={errors.email.message} />}
       </div>
       <div className="flex justify-between mt-4 gap-2">
         <Button

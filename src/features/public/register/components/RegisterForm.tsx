@@ -8,11 +8,15 @@ import InputPassword from "@/shared/components/common/InputPassword";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
 import { enqueueSnackbar } from "notistack";
+import ErrorValidation from "@/shared/components/common/ErrorValidation";
 
 const registerSchema = z
   .object({
     name: z.string().min(1, "Name is required"),
-    email: z.string().email("Invalid email address"),
+    email: z
+      .string()
+      .min(1, "Email is required")
+      .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email address"),
     password: z.string().min(8, "Password must be at least 8 characters"),
     confirmPassword: z
       .string()
@@ -65,11 +69,11 @@ const RegisterForm = () => {
     >
       <div>
         <Input type="text" placeholder="Name" {...register("name")} />
-        {errors.name && <p>{errors.name.message}</p>}
+        {errors.name && <ErrorValidation error={errors.name.message} />}
       </div>
       <div>
         <Input type="email" placeholder="Email" {...register("email")} />
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.email && <ErrorValidation error={errors.email.message} />}
       </div>
       <div>
         <InputPassword
@@ -77,7 +81,7 @@ const RegisterForm = () => {
           {...register("password")}
           withIcon={false}
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.password && <ErrorValidation error={errors.password.message} />}
       </div>
       <div>
         <InputPassword
@@ -85,7 +89,9 @@ const RegisterForm = () => {
           {...register("confirmPassword")}
           withIcon={false}
         />
-        {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+        {errors.confirmPassword && (
+          <ErrorValidation error={errors.confirmPassword.message} />
+        )}
       </div>
       <Button type="submit" className="mt-4">
         Register

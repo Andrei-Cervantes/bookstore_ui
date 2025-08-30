@@ -16,9 +16,13 @@ import { useSnackbar } from "notistack";
 import { AxiosError } from "axios";
 import type { CommonResponse, TokenResponse } from "@/shared/types/authTypes";
 import { Link } from "react-router-dom";
+import ErrorValidation from "@/shared/components/common/ErrorValidation";
 
 const loginSchema = z.object({
-  email: z.string().email("Invalid email address"),
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
@@ -131,11 +135,11 @@ const LoginForm = () => {
           />
           <Mail className="text-primary absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" />
         </div>
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.email && <ErrorValidation error={errors.email.message} />}
       </div>
       <div>
         <InputPassword placeholder="Password" {...register("password")} />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.password && <ErrorValidation error={errors.password.message} />}
       </div>
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
