@@ -1,4 +1,3 @@
-import Link from "@/shared/components/common/Link";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import useAuthService from "@/shared/services/authService";
@@ -6,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { Mail } from "lucide-react";
 import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -16,6 +16,7 @@ const forgotPasswordSchema = z.object({
 type ForgotPasswordSchema = z.infer<typeof forgotPasswordSchema>;
 
 const ForgotPasswordForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -64,13 +65,17 @@ const ForgotPasswordForm = () => {
         </div>
         {errors.email && <p>{errors.email.message}</p>}
       </div>
-      <div className="flex justify-between">
-        <Link to="/login" className="w-full">
-          <Button variant="outline">Back to login</Button>
-        </Link>
+      <div className="flex justify-between mt-4 gap-2">
         <Button
+          className="flex-1"
+          variant="outline"
+          onClick={() => navigate("/login")}
+        >
+          Back to login
+        </Button>
+        <Button
+          className="flex-1"
           type="submit"
-          className="mt-4 w-full"
           disabled={forgotPasswordMutation.isPending}
         >
           {forgotPasswordMutation.isPending ? "Sending email..." : "Send Email"}
