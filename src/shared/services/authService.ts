@@ -26,9 +26,17 @@ const useAuthService = () => {
     return response.data;
   };
 
+  // forgot password
+  const forgotPassword = async (data: { email: string }) => {
+    const response = await axios.post(ENDPOINTS.AUTH.FORGOT_PASSWORD, data);
+
+    return response.data;
+  };
+
   return {
     register,
     login,
+    forgotPassword,
   };
 };
 
