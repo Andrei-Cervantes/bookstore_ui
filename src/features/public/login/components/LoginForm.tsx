@@ -15,6 +15,7 @@ import { useUserStore } from "@/shared/stores/userStore";
 import { useSnackbar } from "notistack";
 import { AxiosError } from "axios";
 import type { CommonResponse, TokenResponse } from "@/shared/types/authTypes";
+import { Link } from "react-router-dom";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -136,15 +137,23 @@ const LoginForm = () => {
         <InputPassword placeholder="Password" {...register("password")} />
         {errors.password && <p>{errors.password.message}</p>}
       </div>
-      <div className="flex items-center gap-2">
-        <Checkbox
-          id="remember"
-          checked={rememberMe}
-          onCheckedChange={handleRememberMeChange}
-        />
-        <label htmlFor="remember" className="text-sm text-muted-foreground">
-          Remember me
-        </label>
+      <div className="flex justify-between">
+        <div className="flex items-center gap-2">
+          <Checkbox
+            id="remember"
+            checked={rememberMe}
+            onCheckedChange={handleRememberMeChange}
+          />
+          <label htmlFor="remember" className="text-sm text-muted-foreground">
+            Remember me
+          </label>
+        </div>
+        <Link
+          className="text-sm text-primary hover:underline hover:underline-offset-2"
+          to="/forgot-password"
+        >
+          Forgot password?
+        </Link>
       </div>
       <Button type="submit" className="mt-4" disabled={loginMutation.isPending}>
         {loginMutation.isPending ? "Logging in..." : "Login"}
