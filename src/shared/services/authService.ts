@@ -33,10 +33,21 @@ const useAuthService = () => {
     return response.data;
   };
 
+  // resend verification email
+  const resendVerificationEmail = async (data: { email: string }) => {
+    const response = await axios.post(
+      ENDPOINTS.AUTH.RESEND_VERIFICATION_EMAIL,
+      data
+    );
+
+    return response.data;
+  };
+
   return {
     register,
     login,
     forgotPassword,
+    resendVerificationEmail,
   };
 };
 
