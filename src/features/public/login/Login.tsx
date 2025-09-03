@@ -1,5 +1,5 @@
 import AuthCard from "@/shared/components/common/AuthCard";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "./components/LoginForm";
 
 const Login = () => {
   return (

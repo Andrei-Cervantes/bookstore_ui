@@ -1,5 +1,5 @@
 import AuthCard from "@/shared/components/common/AuthCard";
-import ResendEmailVerificationForm from "../components/ResendEmailVerificationForm";
+import ResendEmailVerificationForm from "./components/ResendEmailVerificationForm";
 
 const ResendEmailVerification = () => {
   return (
