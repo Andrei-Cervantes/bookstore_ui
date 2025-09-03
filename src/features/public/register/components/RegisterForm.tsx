@@ -93,8 +93,12 @@ const RegisterForm = () => {
           <ErrorValidation error={errors.confirmPassword.message} />
         )}
       </div>
-      <Button type="submit" className="mt-4">
-        Register
+      <Button
+        type="submit"
+        className="mt-4"
+        disabled={registerMutation.isPending}
+      >
+        {registerMutation.isPending ? "Registering..." : "Register"}
       </Button>
     </form>
   );
