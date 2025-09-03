@@ -65,7 +65,7 @@ const LoginForm = () => {
         name: userData.name,
         role: userData.role,
       });
-      navigate("/");
+      navigate("/books");
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
