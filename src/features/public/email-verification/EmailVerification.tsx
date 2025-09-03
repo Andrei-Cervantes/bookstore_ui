@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import useAuthService from "@/shared/services/authService";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
+import { Button } from "@/shared/components/ui/button";
 
 const EmailVerification = () => {
   const [countdown, setCountdown] = useState(3);
@@ -57,9 +58,6 @@ const EmailVerification = () => {
             <p>Verifying your email...</p>
           </div>
         )}
-        {verifyEmailMutation.isSuccess && (
-          <div className="text-green-500">Email verified</div>
-        )}
         {countdown > 0 && (
           <div className="text-sm text-gray-500">
             Redirecting in {countdown}...
@@ -67,6 +65,22 @@ const EmailVerification = () => {
         )}
         {verifyEmailMutation.isError && (
           <div className="text-red-500">Email verification failed</div>
+        )}
+        {verifyEmailMutation.isSuccess && (
+          <div className="text-green-500">Email verified</div>
+        )}
+        {verifyEmailMutation.isSuccess && (
+          <Button className="w-full mt-4" onClick={() => navigate("/login")}>
+            Go to Login
+          </Button>
+        )}
+        {verifyEmailMutation.isError && (
+          <Button
+            className="w-full mt-4"
+            onClick={() => navigate("/resend-verification-email")}
+          >
+            Resend Email Verification
+          </Button>
         )}
       </AuthCard>
     </div>
