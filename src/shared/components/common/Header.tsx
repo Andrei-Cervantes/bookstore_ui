@@ -1,7 +1,7 @@
 import { Button } from "@/shared/components/ui/button";
 import { ModeToggle } from "../mode-toggle";
 import Link from "./Link";
-import useMobile from "@/shared/hooks/useMobile";
+import { useIsMobile } from "@/shared/hooks/useMobile";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const location = useLocation();
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
   const inLogin = location.pathname === "/login";
   const inRegister = location.pathname === "/register";
 

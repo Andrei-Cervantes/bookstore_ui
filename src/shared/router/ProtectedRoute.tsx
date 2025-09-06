@@ -3,7 +3,6 @@ import { useTokenStore } from "../stores/tokenStore";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { accessToken } = useTokenStore();
-
   const isAuthenticated = !!accessToken;
 
   if (!isAuthenticated) {
