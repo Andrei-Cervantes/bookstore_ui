@@ -1,11 +1,15 @@
+import HomeSidebar from "@/shared/components/common/HomeSidebar";
+import { SidebarProvider, SidebarInset } from "@/shared/components/ui/sidebar";
 import { Outlet } from "react-router-dom";
 
 const PrivateLayout = () => {
   return (
-    <div>
-      <p>Private Layout</p>
-      <Outlet />
-    </div>
+    <SidebarProvider>
+      <HomeSidebar />
+      <SidebarInset>
+        <Outlet />
+      </SidebarInset>
+    </SidebarProvider>
   );
 };
 
