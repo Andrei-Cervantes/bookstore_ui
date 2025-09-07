@@ -7,7 +7,7 @@ import {
   SidebarFooter,
 } from "@/shared/components/ui/sidebar";
 import { Button } from "@/shared/components/ui/button";
-import { LogOutIcon } from "lucide-react";
+import { Loader2Icon, LogOutIcon } from "lucide-react";
 import useAuthService from "@/shared/services/authService";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
@@ -49,8 +49,16 @@ const HomeSidebar = () => {
       </SidebarContent>
       <SidebarFooter>
         <SidebarGroup>
-          <Button onClick={() => logoutMutation.mutate()}>
-            <LogOutIcon />
+          <Button
+            disabled={logoutMutation.isPending}
+            onClick={() => logoutMutation.mutate()}
+          >
+            {logoutMutation.isPending ? (
+              <Loader2Icon className="animate-spin" />
+            ) : (
+              <LogOutIcon />
+            )}
+            <span>Logout</span>
           </Button>
         </SidebarGroup>
       </SidebarFooter>
