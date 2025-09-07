@@ -7,8 +7,10 @@ import type {
   CommonResponse,
   TokenResponse,
 } from "@/shared/types/authTypes";
+import { useTokenStore } from "@/shared/stores/tokenStore";
 
 const useAuthService = () => {
+  const { accessToken } = useTokenStore();
   // register
   const register = async (data: RegisterRequest) => {
     const response = await axios.post<CommonResponse<TokenResponse>>(
@@ -52,12 +54,28 @@ const useAuthService = () => {
     return response.data;
   };
 
+  // logout user
+  const logout = async () => {
+    const response = await axios.post(
+      ENDPOINTS.AUTH.LOGOUT,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    return response.data;
+  };
+
   return {
     register,
     login,
     forgotPassword,
     resendVerificationEmail,
     verifyEmail,
+    logout,
   };
 };
 
