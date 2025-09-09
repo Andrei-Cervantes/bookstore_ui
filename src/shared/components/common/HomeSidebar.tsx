@@ -7,7 +7,6 @@ import {
   SidebarFooter,
   SidebarGroupContent,
   SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/shared/components/ui/sidebar";
 import { Button } from "@/shared/components/ui/button";
 import { BookOpenText, Loader2Icon, LogOutIcon, UserCog } from "lucide-react";
@@ -46,23 +45,19 @@ const HomeSidebar = () => {
         <SidebarGroup>
           <SidebarGroupLabel>Books</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <BookOpenText />
-                <span>Books</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            <SidebarMenuButton>
+              <BookOpenText />
+              <span>Books</span>
+            </SidebarMenuButton>
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupLabel>Account</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <UserCog />
-                <span>Profile</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            <SidebarMenuButton>
+              <UserCog />
+              <span>Profile</span>
+            </SidebarMenuButton>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
