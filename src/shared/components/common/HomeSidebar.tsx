@@ -5,9 +5,12 @@ import {
   SidebarHeader,
   SidebarContent,
   SidebarFooter,
+  SidebarGroupContent,
+  SidebarMenuButton,
+  SidebarMenuItem,
 } from "@/shared/components/ui/sidebar";
 import { Button } from "@/shared/components/ui/button";
-import { Loader2Icon, LogOutIcon } from "lucide-react";
+import { BookOpenText, Loader2Icon, LogOutIcon, UserCog } from "lucide-react";
 import useAuthService from "@/shared/services/authService";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
@@ -42,9 +45,25 @@ const HomeSidebar = () => {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Books</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <BookOpenText />
+                <span>Books</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupLabel>Account</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <UserCog />
+                <span>Profile</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
