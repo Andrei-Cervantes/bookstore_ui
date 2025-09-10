@@ -37,7 +37,7 @@ const HomeSidebar = () => {
   });
 
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
       <SidebarHeader>
         <h1>Home</h1>
       </SidebarHeader>
