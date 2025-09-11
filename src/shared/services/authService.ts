@@ -69,6 +69,17 @@ const useAuthService = () => {
     return response.data;
   };
 
+  // get current user
+  const getCurrentUser = async () => {
+    const response = await axios.get(ENDPOINTS.AUTH.GET_USER, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return response.data;
+  };
+
   return {
     register,
     login,
@@ -76,6 +87,7 @@ const useAuthService = () => {
     resendVerificationEmail,
     verifyEmail,
     logout,
+    getCurrentUser,
   };
 };
 

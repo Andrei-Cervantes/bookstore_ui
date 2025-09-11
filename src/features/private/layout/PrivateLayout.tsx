@@ -4,9 +4,58 @@ import {
   SidebarInset,
   SidebarTrigger,
 } from "@/shared/components/ui/sidebar";
-import { Outlet } from "react-router-dom";
+import useAuthService from "@/shared/services/authService";
+import { useUserStore } from "@/shared/stores/userStore";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
+import { useEffect, useState } from "react";
+import { useTokenStore } from "@/shared/stores/tokenStore";
 
 const PrivateLayout = () => {
+  const { getCurrentUser } = useAuthService();
+  const { setUser, removeUser } = useUserStore();
+  const { enqueueSnackbar } = useSnackbar();
+  const { removeTokens } = useTokenStore();
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const response = await getCurrentUser();
+        setUser(response.data);
+      } catch (error) {
+        console.error("Error fetching current user:", error);
+        removeTokens();
+        removeUser();
+        enqueueSnackbar("Session expired. Please log in again.", {
+          variant: "error",
+        });
+        navigate("/login");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCurrentUser();
+  }, [
+    getCurrentUser,
+    setUser,
+    removeUser,
+    removeTokens,
+    enqueueSnackbar,
+    navigate,
+  ]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        Loading...
+      </div>
+    );
+  }
+
   return (
     <SidebarProvider>
       <HomeSidebar />

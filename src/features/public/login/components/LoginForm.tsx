@@ -11,10 +11,9 @@ import { Mail } from "lucide-react";
 import { Checkbox } from "@/shared/components/ui/checkbox";
 import { useEffect, useState } from "react";
 import { useTokenStore } from "@/shared/stores/tokenStore";
-import { useUserStore } from "@/shared/stores/userStore";
 import { useSnackbar } from "notistack";
 import { AxiosError } from "axios";
-import type { CommonResponse, TokenResponse } from "@/shared/types/authTypes";
+import type { CommonResponse } from "@/shared/types/authTypes";
 import { Link } from "react-router-dom";
 import ErrorValidation from "@/shared/components/common/ErrorValidation";
 
@@ -31,7 +30,6 @@ type LoginSchema = z.infer<typeof loginSchema>;
 const LoginForm = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const { setTokens } = useTokenStore();
-  const { setUser } = useUserStore();
   const navigate = useNavigate();
   const {
     register,
@@ -48,23 +46,15 @@ const LoginForm = () => {
   const { enqueueSnackbar } = useSnackbar();
   const loginMutation = useMutation({
     mutationFn: (data: LoginSchema) => loginService(data),
-    onSuccess: (data: CommonResponse<TokenResponse>) => {
-      const { data: userData } = data;
-      const { tokens: tokensData } = userData;
+    onSuccess: (
+      data: CommonResponse<{ accessToken: string; refreshToken: string }>
+    ) => {
+      const { accessToken, refreshToken } = data.data;
 
       enqueueSnackbar("Login successful", {
         variant: "success",
       });
-      setTokens(tokensData.accessToken, tokensData.refreshToken);
-      setUser({
-        id: userData.id,
-        avatar: userData.avatar,
-        email: userData.email,
-        isActive: userData.isActive,
-        isVerified: userData.isVerified,
-        name: userData.name,
-        role: userData.role,
-      });
+      setTokens(accessToken, refreshToken);
       navigate("/books");
     },
     onError: (error) => {
