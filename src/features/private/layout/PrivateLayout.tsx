@@ -2,7 +2,7 @@ import HomeSidebar from "@/shared/components/common/HomeSidebar";
 import {
   SidebarProvider,
   SidebarInset,
-  SidebarTrigger,
+  SidebarRail,
 } from "@/shared/components/ui/sidebar";
 import useAuthService from "@/shared/services/authService";
 import { useUserStore } from "@/shared/stores/userStore";
@@ -61,7 +61,7 @@ const PrivateLayout = () => {
       <HomeSidebar />
       <SidebarInset>
         <div className="relative flex-1">
-          <SidebarTrigger className="absolute top-2 left-2 z-10" />
+          <SidebarRail />
           <Outlet />
         </div>
       </SidebarInset>
