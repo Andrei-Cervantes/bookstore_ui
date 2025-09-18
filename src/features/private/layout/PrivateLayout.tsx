@@ -61,7 +61,7 @@ const PrivateLayout = () => {
       <HomeSidebar />
       <SidebarInset>
         <div className="relative flex-1">
-          <SidebarRail />
+          <SidebarRail className="cursor-pointer" />
           <Outlet />
         </div>
       </SidebarInset>
