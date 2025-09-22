@@ -39,14 +39,7 @@ const PrivateLayout = () => {
     };
 
     fetchCurrentUser();
-  }, [
-    getCurrentUser,
-    setUser,
-    removeUser,
-    removeTokens,
-    enqueueSnackbar,
-    navigate,
-  ]);
+  }, []); // Empty dependency array - this should only run once on mount
 
   if (loading) {
     return (
