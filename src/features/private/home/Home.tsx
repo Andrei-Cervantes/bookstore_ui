@@ -14,13 +14,14 @@ const Home = () => {
       <Separator />
       <section className="space-y-4">
         <h1 className="text-2xl font-bold">Latest Books</h1>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
+        <div className="flex flex-wrap gap-4">
           {Array.from({ length: 5 }).map((_, index) => (
             <BookCard
               key={index}
               title="Book Title"
-              description="Book Description"
-              image="https://placehold.co/300x400"
+              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor reprehenderit.
+"
+              image="https://placehold.co/180x180"
               author="Book Author"
               publishYear="2025"
               genre={["Genre 1", "Genre 2"]}
