@@ -71,6 +71,7 @@ const ForgotPasswordForm = () => {
       </div>
       <div className="flex justify-between mt-4 gap-2">
         <Button
+          type="button"
           className="flex-1"
           variant="outline"
           onClick={() => navigate("/login")}
