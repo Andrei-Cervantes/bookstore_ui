@@ -74,6 +74,7 @@ const ForgotPasswordForm = () => {
           className="flex-1"
           variant="outline"
           onClick={() => navigate("/login")}
+          disabled={forgotPasswordMutation.isPending}
         >
           Back to login
         </Button>
